@@ -39,8 +39,8 @@
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/goalie-career-buddy.git
-cd goalie-career-buddy
+git clone https://github.com/Vidushi2709/Goalie.git
+cd goalie
 
 # Set up virtual environment (optional but recommended)
 python -m venv venv
