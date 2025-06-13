@@ -138,6 +138,7 @@ button:hover {
     .chat-container {
         height: 100vh;
         border-radius: 0;
+        width: 100%;
     }
     
     .header {
