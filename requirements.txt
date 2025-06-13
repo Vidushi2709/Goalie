@@ -1,4 +1,5 @@
 Flask
 python-dotenv
+mistralai
+scikit-learn
 langchain
-mistralai 
