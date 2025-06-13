@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatCompletionResponseChoice
+from mistralai.models.chat_completion import ChatMessage
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_community.chat_message_histories import ChatMessageHistory
