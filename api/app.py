@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from chatbot import best_career, explain, clarify
+from api.chatbot import best_career, explain, clarify
 from dotenv import load_dotenv
 from langchain.memory import ConversationBufferMemory
 from langchain_core.messages import HumanMessage, AIMessage
