@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goalie - Career Chatbot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            ⚽ Goalie - Your Career Keeper ⚽
+        </div>
+        <div id="chat-box" class="chat-box">
+            <div class="bot-msg"> Hi! I'm Goalie. Tell me what you're into, and I'll help you find your vibe!</div>
+        </div>
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="What gets you hyped? 🤔 (No wrong answers!)" autocomplete="off" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const chatForm = document.getElementById("chat-form");
+        const chatBox = document.getElementById("chat-box");
+        const userInput = document.getElementById("user-input");
+
+        chatForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const input = userInput.value;
+            if (!input.trim()) return;
+
+            appendMessage("user", input);
+            userInput.value = "";
+
+            appendMessage("bot", "⏳ Thinking...");
+
+            const response = await fetch("/api/goalie", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: input })
+            });
+
+            const data = await response.json();
+            chatBox.lastChild.remove();
+            appendMessage("bot", formatMarkdown(data.reply));
+        });
+
+        function formatMarkdown(text) {
+            return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+        }
+
+        function appendMessage(sender, text) {
+        const div = document.createElement("div");
+        div.className = sender === "user" ? "user-msg" : "bot-msg";
+        if (sender === "bot") {
+            div.innerHTML = text;
+        } else {
+            div.textContent = text;
+        }
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+        
+    </script>
+</body>
+</html>
