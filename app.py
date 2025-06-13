@@ -7,7 +7,7 @@ import os
 
 load_dotenv()
 
-app = Flask(__name__, static_folder="../static", template_folder="../templates")
+app = Flask(__name__, static_folder="static", template_folder="templates")
 
 memory = ConversationBufferMemory(return_messages=True)
 
