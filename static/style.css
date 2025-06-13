@@ -1,15 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: linear-gradient(120deg, #FFB22C, #F3C623);
     font-family: 'Fredoka', sans-serif;
     margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .chat-container {
-    max-width: 1400px;
-    margin: 50px auto;
+    width: 85%;
+    height: 100vh;
+    margin: 0 auto;
     background-color: #FFF5E1;
-    border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    box-shadow: none;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -18,31 +27,36 @@ body {
 .header {
     background-color: #FA812F;
     color: white;
-    font-size: 28px;
-    padding: 20px;
+    font-size: clamp(18px, 4vw, 28px);
+    padding: 15px 20px;
     font-weight: 700;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
 .chat-box {
-    padding: 25px;
-    height: 650px;
+    padding: 20px;
+    flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 15px;
     background-color: #FFFBE6;
+    height: 0; /* Force flex item to respect flex: 1 */
 }
 
 .user-msg, .bot-msg {
     max-width: 70%;
     padding: 16px 20px;
     border-radius: 20px;
-    font-size: 18px;
+    font-size: clamp(14px, 2.5vw, 18px);
     line-height: 1.5;
     white-space: pre-wrap;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .user-msg {
@@ -59,37 +73,165 @@ body {
 
 form {
     display: flex;
-    padding: 15px;
+    padding: 15px 20px;
     background-color: #FEF9E1;
     border-top: 1px solid #7B4019;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    gap: 10px;
+    flex-shrink: 0;
+    min-height: 60px;
+    align-items: center;
 }
 
 input[type="text"] {
     flex: 1;
     padding: 14px;
-    font-size: 18px;
+    font-size: clamp(14px, 2.5vw, 18px);
     border-radius: 10px;
     border: 1px solid #ccc;
     outline: none;
     transition: border-color 0.3s;
+    min-width: 0;
 }
+
 input[type="text"]:focus {
     border-color: #FFB823;
 }
 
 button {
     padding: 12px 20px;
-    margin-left: 10px;
-    font-size: 16px;
+    font-size: clamp(14px, 2.5vw, 16px);
     background-color: #FFB823;
     color: #020202;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+    white-space: nowrap;
+    min-width: 60px;
 }
 
 button:hover {
     background-color: #FFA500;
+}
+
+
+@media (min-width: 769px) {
+    body {
+        padding: 20px;
+    }
+    
+    .chat-container {
+        height: calc(96vh - 40px);
+        border-radius: 20px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        margin: 20px auto;
+    }
+    
+    .header {
+        border-radius: 20px 20px 0 0;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .chat-container {
+        height: 100vh;
+        border-radius: 0;
+    }
+    
+    .header {
+        padding: 12px 15px;
+        font-size: clamp(16px, 4vw, 24px);
+    }
+    
+    .chat-box {
+        padding: 15px;
+        gap: 12px;
+    }
+    
+    .user-msg, .bot-msg {
+        max-width: 85%;
+        padding: 12px 16px;
+        border-radius: 15px;
+    }
+    
+    form {
+        padding: 12px 15px;
+        gap: 8px;
+        min-height: 55px;
+    }
+    
+    input[type="text"] {
+        padding: 12px;
+    }
+    
+    button {
+        padding: 12px 16px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .header {
+        padding: 10px 12px;
+        font-size: clamp(14px, 4vw, 20px);
+    }
+    
+    .chat-box {
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .user-msg, .bot-msg {
+        max-width: 90%;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 16px;
+    }
+    
+    form {
+        padding: 10px 12px;
+        gap: 6px;
+        min-height: 50px;
+    }
+    
+    input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+    
+    button {
+        padding: 10px 14px;
+        font-size: 14px;
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .header {
+        padding: 8px 10px;
+    }
+    
+    .user-msg, .bot-msg {
+        max-width: 95%;
+        padding: 8px 12px;
+    }
+    
+    form {
+        padding: 8px 10px;
+        min-height: 45px;
+    }
+    
+    input[type="text"] {
+        padding: 8px;
+    }
+    
+    button {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
 }
