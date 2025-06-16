@@ -54,3 +54,7 @@ echo MISTRAL_API=your_key_here > .env
 
 # Run the app
 python app.py
+```
+---
+
+Created by Vin ❤️
